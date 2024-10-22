@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import "./FormStyles.css";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -8,7 +10,6 @@ const Login: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Mock validation
     if (email === "admin@example.com" && password === "password") {
       navigate("/loggedin");
     } else {
@@ -17,11 +18,17 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Login Page</h2>
+    <motion.div
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 50 }}
+      transition={{ duration: 0.5 }}
+      className="form-container"
+    >
+      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Email: </label>
+          <label>Email:</label>
           <input
             type="email"
             value={email}
@@ -29,7 +36,7 @@ const Login: React.FC = () => {
           />
         </div>
         <div>
-          <label>Password: </label>
+          <label>Password:</label>
           <input
             type="password"
             value={password}
@@ -38,7 +45,7 @@ const Login: React.FC = () => {
         </div>
         <button type="submit">Login</button>
       </form>
-    </div>
+    </motion.div>
   );
 };
 
